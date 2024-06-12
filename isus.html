@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Material Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e2e2e2;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Furniture Material Selector</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="form-container">
+            <form id="materialForm">
+                <div class="form-group">
+                    <label for="length">Length (cm):</label>
+                    <input type="number" id="length" name="length" required>
+                </div>
+                <div class="form-group">
+                    <label for="width">Width (cm):</label>
+                    <input type="number" id="width" name="width" required>
+                </div>
+                <div class="form-group">
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" name="height" required>
+                </div>
+                <div class="form-group">
+                    <label for="material">Select Material:</label>
+                    <select id="material" name="material" required>
+                        <option value="wood">Wood</option>
+                        <option value="metal">Metal</option>
+                        <option value="plastic">Plastic</option>
+                    </select>
+                </div>
+                <button type="button" onclick="calculateMaterial()">Calculate</button>
+            </form>
+            <div id="result" class="result" style="display:none;">
+                <h2>Recommended Material</h2>
+                <p id="resultText"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calculateMaterial() {
+            const length = document.getElementById('length').value;
+            const width = document.getElementById('width').value;
+            const height = document.getElementById('height').value;
+            const material = document.getElementById('material').value;
+
+            const volume = length * width * height;
+            let recommendation = '';
+
+            if (material === 'wood') {
+                recommendation = 'For wood, you should consider oak or pine for their durability and aesthetic.';
+            } else if (material === 'metal') {
+                recommendation = 'For metal, stainless steel or aluminum are good choices due to their strength and resistance to corrosion.';
+            } else if (material === 'plastic') {
+                recommendation = 'For plastic, ABS or polypropylene are recommended for their durability and ease of cleaning.';
+            }
+
+            document.getElementById('resultText').textContent = `Based on the dimensions provided, the volume of the furniture is ${volume} cubic centimeters. ${recommendation}`;
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
